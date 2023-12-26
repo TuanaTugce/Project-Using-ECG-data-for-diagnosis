@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-//#include <iomanip> 
 using namespace std;
 
 template<typename T>
@@ -41,27 +40,6 @@ public:
     {
         return head == nullptr;
     }
-
-    T front() const
-    {
-        if (isEmpty())
-            throw out_of_range("The list is empty");
-        return head->data1;
-    }
-
-    T back() const
-    {
-        if (isEmpty())
-            throw out_of_range("The list is empty");
-        Node<T>* temp = head;
-
-        while (temp->next)
-            temp = temp->next;
-
-        return temp->data3;
-
-    }
-
     void pushBack(Node<T>*newNode)
     {
         if (isEmpty())
@@ -186,16 +164,8 @@ void sepWrite(ofstream& brady, ofstream& normal,ofstream &tachy)
     }
 }
 
-
-};
-
-
-int main()
+void writeToList(ifstream& file)
 {
-    MyLinkedList<float>list;
-
-    ifstream file("person1-TEST.csv");
-
     if (!file.is_open())
     {
         cout << "Error while opening the file" << endl;
@@ -222,18 +192,34 @@ int main()
             data3 = atof(tempString.c_str());
 
             Node<float>* temp = new Node<float>(data1, data2, data3, nullptr);
-            list.pushBack(temp);
+            pushBack(temp);
         }
-        file.close();
     }
+    
+}
 
+};
+
+
+int main()
+{
+    MyLinkedList<float>list;
+
+    ifstream file1("person1-TEST.csv");
+    list.writeToList(file1);
     list.print();
+    file1.close();
 
-    cout << list.front();
-    cout << endl << list.back();
-    brady.close();
-    tachy.close();
-    normal.close();
 
+    ofstream brady1("person1.bradycardia.txt");
+    ofstream normal1("person1.normal.txt");
+    ofstream tachy1("person1.tacycardia.txt");
+
+    list.sepWrite(brady1,normal1,tachy1);
+
+    brady1.close();
+    normal1.close();
+    tachy1.close();
+    
     return 0;
 }
