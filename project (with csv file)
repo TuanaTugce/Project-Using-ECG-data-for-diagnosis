@@ -220,6 +220,22 @@ int main()
     brady1.close();
     normal1.close();
     tachy1.close();
+list.clear();
+   ifstream file2("person2-TEST.csv");
+    list.writeToList(file2);
+    list.print();
+    file2.close();
+
+
+    ofstreambrady2("person2.bradycardia.txt");
+    ofstream normal2("person2.normal.txt");
+   ofstreamtachy2("person2.tacycardia.txt");
+
+    list.sepWrite(brady2,normal2,tachy2);
+
+    brady2.close();
+    normal2.close();
+    tachy2.close();
     
     return 0;
 }
