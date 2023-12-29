@@ -166,16 +166,17 @@ public:
             switch (last)
             {
                 case 1:
-					print(brady);
-					break;
+		    print(brady);
+		    break;
                 case 2:
                     print(normal);
                     break;
                 case 3:
                     print(tachy);
-					break;
+		    break;
             }
             popFront();
+            clear();
 
         }
     }
@@ -224,7 +225,7 @@ public:
             print(file);
             popFront();
         }
-
+        clear();
     }
 
     void combine(ofstream& combinedfile, ifstream& file1, ifstream& file2)
