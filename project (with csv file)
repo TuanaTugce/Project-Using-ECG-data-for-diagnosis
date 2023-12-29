@@ -141,26 +141,42 @@ public:
         else
         {
             cout << "Files opened successfully" << endl;
+            int last = 0;
 
-            while (!isEmpty())
+            while (size>1)
             {
                 switch (findHeartBeat())
                 {
                 case 1:
                     print(brady);
+                    last = 1;
                     break;
+                case 2:
+                    print(normal);
+                    last = 2;
+                    break;
+                case 3:
+                    print(tachy);
+                    last = 3;
+                    break;
+                }
+                popFront();
+            }
+
+            switch (last)
+            {
+                case 1:
+					print(brady);
+					break;
                 case 2:
                     print(normal);
                     break;
                 case 3:
                     print(tachy);
-                    break;
-                case -1:
-                    print(tachy);
-                    break;
-                }
-                popFront();
+					break;
             }
+            popFront();
+
         }
     }
 
